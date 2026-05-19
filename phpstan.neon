@@ -1,0 +1,10 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+parameters:
+    level: 5
+    paths:
+        - app
+    ignoreErrors:
+#        - '#Result of static method Illuminate\\Support\\Facades\\Auth::#'
+#        - '#PHPDoc tag @mixin contains unknown class App\\Models#'

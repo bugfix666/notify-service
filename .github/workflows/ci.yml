@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gate:
+    name: Quality gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build docker
+        run: make up
+      - name: Validate composer
+        run: make validate-composer
+      - name: Run openapi test
+        run: make openapi
+      - name: Run CS check
+        run: make cs-check
+      - name: Run PHPStan
+        run: make phpstan
+      - name: Run PSALM
+        run: make psalm
+      - name: Run PHP Parallel Lint
+        run: make lint
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    needs:
+      - quality-gate
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build docker
+        run: make up
+      - name: Run tests
+        run: make test
