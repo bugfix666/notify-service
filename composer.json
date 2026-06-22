@@ -7,7 +7,7 @@
         "laravel",
         "framework"
     ],
-    "license": "GPL-2.0",
+    "license": "GPL-2.0-only",
     "require": {
         "php": "^8.4",
         "ext-bcmath": "*",
